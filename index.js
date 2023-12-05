@@ -7,8 +7,11 @@ const PORT = 3600;
 
 const app = express();
 
+// MIDDLEWARE
 app.use(express.json())
+app.use('/assets', express.static('public/images'))
 
+// ROUTES
 app.use(UserRoute);
 app.use(ContactUsRoute);
 

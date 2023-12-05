@@ -7,7 +7,7 @@ const ContactUs = db.define("contact_us", {
       primaryKey: true,
       autoIncrement: true,
     },
-    name: {
+    username: {
       type: DataTypes.STRING,
     },
     email: {

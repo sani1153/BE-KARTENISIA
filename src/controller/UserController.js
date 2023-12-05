@@ -4,7 +4,7 @@ const User = require('../models/UserModel');
 const createNewUser = async (req, res) => {
     const {body} = req;
 
-    if(!body.name || !body.email || !body.password){
+    if(!body.username || !body.email || !body.password){
         return res.status(400).json({
             message: "Data yang anda masukkan tidak lengkap",
             data: null
@@ -12,13 +12,18 @@ const createNewUser = async (req, res) => {
     }
 
     try {
-        const user = {
-          name: req.body.name,
-          email: req.body.email.trim(),
-          password: req.body.password.trim()
-        };
-    
-        await User.create(user);
+      const saltRounds = 10;
+      // Hash password menggunakan bcrypt
+      const hashedPassword = await bcrypt.hash(req.body.password, saltRounds);
+      
+      // Simpan data pengguna ke database, termasuk password yang sudah di-hash
+      const userData = {
+        username: req.body.username,
+        email: req.body.email,
+        password: hashedPassword,
+      };
+      
+      const data = await User.create(userData);
     
         res.status(201).send({ 
             msg: "Create New User Success",
