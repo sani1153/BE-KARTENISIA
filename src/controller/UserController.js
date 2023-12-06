@@ -1,5 +1,6 @@
 const bcrypt = require('bcrypt');
 const User = require('../models/UserModel');
+const jwt = require('jsonwebtoken')
 
 const createNewUser = async (req, res) => {
     const {body} = req;
@@ -60,9 +61,15 @@ const loginController = async (req, res) => {
             data : user.password 
         });
       }
+
+      if(passwordMatch){
+        const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
+          expiresIn: 86400 // expires in 24 hours
+        });
+        // Jika email dan password cocok, user berhasil login
+        res.status(200).json({ message: 'Login berhasil', user, token });
+      }
   
-      // Jika email dan password cocok, user berhasil login
-      res.status(200).json({ message: 'Login berhasil', user });
   
     } catch (error) {
       console.error('Error:', error);

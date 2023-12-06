@@ -1,9 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const Comment = require('../controller/CommentController');
+const verifyToken = require('../middleware/Auth')
 
 // Membuat komentar baru
-router.post('/comments', Comment.createComment);
+router.post('/comments', verifyToken, Comment.createComment);
 
 // Menampilkan semua komentar
 router.get('/comments', Comment.getAllComments);
