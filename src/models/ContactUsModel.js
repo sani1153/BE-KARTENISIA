@@ -22,7 +22,7 @@ const ContactUs = db.define("contact_us", {
 });
 
 // WARNING! KODE DI BAWAH BERFUNGSI UNTUK MEMBUAT TABLE BARU ATAU UPDATE TABLE TAPI DENGAN MENGHAPUS SEMUA VALUE YG ADA 
-// db.sync({ force: true })
+// db.sync({ force: true }) // kalo mau menambahkan agar data tidak ke reset semua ganti force jadi alt: true
 // .then(() => {
 //     console.log(`contact_us synced`)
 // })
