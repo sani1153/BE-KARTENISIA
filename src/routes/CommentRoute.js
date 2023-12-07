@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Comment = require('../controller/CommentController');
-const verifyToken = require('../middleware/Auth')
+const verifyToken = require('../middleware/Authentication')
 
 // Membuat komentar baru
 router.post('/comments', verifyToken, Comment.createComment);

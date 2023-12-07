@@ -1,5 +1,3 @@
-// controllers/commentController.js
-
 const Comment = require('../models/CommentModels');
 
 // Membuat komentar baru

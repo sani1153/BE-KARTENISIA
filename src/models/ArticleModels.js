@@ -1,36 +1,32 @@
 const { DataTypes } = require('sequelize')
 const db = require('../config/db.js');
-const User = require('./UserModel.js');
 
-const Comment = db.define("comment", {
-    comment_id: {
+const Articles = db.define("articles", {
+    article_id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
     },
-    user_id: {
-      type: DataTypes.INTEGER,
-      references: {
-        model: User,
-        key: 'user_id',
-      },
+    title: {
+      type: DataTypes.STRING
     },
-    likes_count: {
-      type: DataTypes.INTEGER,
-      defaultValue: 0,
+    url_image: {
+        type: DataTypes.STRING
     },
-    comment: {
-      type: DataTypes.TEXT,
-      allowNull: false,
+    description: {
+        type: DataTypes.TEXT
     }
-});
+    }, {
+        freezeTableName: true,
+        timestamps: false
+    });
 
 
 // WARNING! KODE DI BAWAH BERFUNGSI UNTUK MEMBUAT TABLE BARU ATAU UPDATE TABLE TAPI DENGAN MENGHAPUS SEMUA VALUE YG ADA 
 // db.sync({ alter: true }) // kalo mau menambahkan agar data tidak ke reset semua ganti force jadi alt: true
 // .then(() => {
-//     console.log(`comment synced`)
+//     console.log(`articles synced`)
 // })
 // .catch((error) => console.log(`Unable to connect to databse: ${error}`));
 
-module.exports = Comment;
+module.exports = Articles;

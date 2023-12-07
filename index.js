@@ -1,10 +1,11 @@
 const express = require("express");
+const PORT = 3600;
 require('dotenv').config()
-const db =  require('./src/config/db.js');
+
 const UserRoute =  require('./src/routes/UserRoute.js');
 const ContactUsRoute =  require('./src/routes/ContactUsRoute.js');
 const CommentRoute = require('./src/routes/CommentRoute.js')
-const PORT = 3600;
+const ArticleRoute = require('./src/routes/ArticleRoutes.js')
 
 const app = express();
 
@@ -16,6 +17,7 @@ app.use('/assets', express.static('public/images'))
 app.use(UserRoute);
 app.use(ContactUsRoute);
 app.use(CommentRoute);
+app.use(ArticleRoute);
 
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
