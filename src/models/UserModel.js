@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize')
 const db = require('../config/db.js')
 
-const User = db.define("user", {
+const User = db.define("users", {
   user_id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
@@ -16,7 +16,12 @@ const User = db.define("user", {
   password: {
     type: DataTypes.STRING,
   },
-});
+  confirm_password: {
+    type: DataTypes.STRING,
+  }
+  }, {
+    freezeTableName: true,
+  });
 
 // WARNING! KODE DI BAWAH BERFUNGSI UNTUK MEMBUAT TABLE BARU ATAU UPDATE TABLE TAPI DENGAN MENGHAPUS SEMUA VALUE YG ADA 
 // db.sync({ alter: true }) // kalo mau menambahkan agar data tidak ke reset semua ganti force jadi alt: true

@@ -5,11 +5,32 @@ const jwt = require('jsonwebtoken')
 const createNewUser = async (req, res) => {
     const {body} = req;
 
-    if(!body.username || !body.email || !body.password){
+    if(!body.username || !body.email || !body.password || !body.confirm_password){
         return res.status(400).json({
             message: "Data yang anda masukkan tidak lengkap",
             data: null
         })
+    }
+
+    if(body.confirm_password !== body.password){
+      return res.status(400).json({
+          message: "Password tidak sama",
+          data: null
+      })
+    }
+
+    const foundEmails = await User.findAll({
+      where: {
+        email: body.email // Menemukan semua entri dengan email yang cocok
+      }
+    });
+    
+    // Periksa jika ada email yang sudah terdaftar
+    if (foundEmails.length > 0) {
+      return res.status(400).json({
+        message: "Email sudah terdaftar",
+        data: null
+      });
     }
 
     try {
