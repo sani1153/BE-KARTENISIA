@@ -4,7 +4,7 @@ const Comment = require('../controller/CommentController');
 const verifyToken = require('../middleware/Authentication')
 
 // Membuat komentar baru
-router.post('/comments', verifyToken, Comment.createComment);
+router.post('/comment', verifyToken, Comment.createComment);
 
 // Menampilkan semua komentar
 router.get('/comments', Comment.getAllComments);
