@@ -32,9 +32,27 @@ const SendMessage = async (req, res) => {
       }
 }
 
+const getMessage = async (req, res) => {
+    console.log(req)
+    try {
+        const Message = await ContactUs.findAll()
+
+        res.json({
+            message: 'Get Messages Success',
+            data: Message // Mengirim data artikel sebagai respons
+        });
+
+    } catch (error) {
+        res.status(500).json({
+            message: "Server Error",
+            serverMessage : error
+        })
+    }
+}
 
 module.exports = {
     SendMessage,
+    getMessage
 }
 
 
