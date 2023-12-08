@@ -6,7 +6,8 @@ const db = new Sequelize(process.env.DB_NAME, process.env.DB_USERNAME, process.e
   timezone: '+07:00', // Sesuaikan dengan zona waktu yang diinginkan (Asia/Jakarta)
   dialectOptions: {
     timezone: '+07:00', // Jika diperlukan, sesuaikan dengan zona waktu yang diinginkan
-  }
+  },
+  port: process.env.DB_PORT
 });
 
 module.exports = db;

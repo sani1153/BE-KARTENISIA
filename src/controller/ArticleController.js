@@ -6,7 +6,8 @@ const addArticle = async (req, res) => {
         const article = {
             title: req.body.title,
             url_image: req.body.url_image,
-            description: req.body.description
+            description: req.body.description,
+            category: req.body.category
         }
 
         await articles.create(article);
@@ -25,8 +26,20 @@ const addArticle = async (req, res) => {
 }
 
 const getArticles = async (req, res) => {
+    console.log(req)
     try {
-        const articlesData = await articles.findAll(); // Mengambil data artikel
+        let articlesData;
+        // Mengambil data artikel
+        if(req.query.category){
+            articlesData = await articles.findAll({
+                where: {
+                    category: req.query.category
+                }
+        
+            });
+        }else{
+            articlesData = await articles.findAll()
+        }
 
         res.json({
             message: 'Get Article Success',
@@ -53,7 +66,7 @@ const getArticles = async (req, res) => {
 //         description: "Ini Berita Kedua"
 //     },
 //     {
-//         title: "Article 3",
+//         title: "Article 3"
 //         urlImage: "https://cdn.mos.cms.futurecdn.net/c3RwNWN8XeDGfgrBXGaR4f-1200-80.jpg",
 //         description: "Ini berita ketiga"
 //     }])

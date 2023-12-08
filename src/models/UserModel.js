@@ -24,10 +24,10 @@ const User = db.define("users", {
   });
 
 // WARNING! KODE DI BAWAH BERFUNGSI UNTUK MEMBUAT TABLE BARU ATAU UPDATE TABLE TAPI DENGAN MENGHAPUS SEMUA VALUE YG ADA 
-// db.sync({ alter: true }) // kalo mau menambahkan agar data tidak ke reset semua ganti force jadi alt: true
-//   .then(() => {
-//     console.log(`user synced`)
-//   })
-//   .catch((error) => console.log(`Unable to connect to databse: ${error}`));
+db.sync({ alter: true }) // kalo mau menambahkan agar data tidak ke reset semua ganti force jadi alt: true
+  .then(() => {
+    console.log(`user synced`)
+  })
+  .catch((error) => console.log(`Unable to connect to databse: ${error}`));
   
 module.exports = User;
