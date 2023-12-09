@@ -54,6 +54,32 @@ const getArticles = async (req, res) => {
     }
 }
 
+const getArticlesByTittle = async (req, res) => {
+    try {
+        const searchTerm = req.query.q; // Mendapatkan query pencarian dari request
+        const articles = await Article.findAll({
+            where: {
+                // Menentukan kondisi pencarian, misalnya judul mengandung searchTerm
+                title: {
+                    [Op.like]: `%${searchTerm}%`
+                }
+            }
+        });
+
+        res.json({
+            message: 'Search Success',
+            data: articles
+        });
+
+    } catch (error) {
+        res.status(500).json({
+            message: "Error searching articles",
+            error: error.message
+        });
+    }
+};
+
+
 // function backfillArticle(req, res, next){
 //     articles.bulkCreate([{
 //         title: "Article 1",
@@ -82,5 +108,6 @@ const getArticles = async (req, res) => {
 
 module.exports = {
     addArticle, 
-    getArticles
+    getArticles,
+    getArticlesByTittle
 }
