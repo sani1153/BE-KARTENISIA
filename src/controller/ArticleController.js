@@ -1,4 +1,5 @@
 const articles = require('../models/ArticleModels');
+const { Op } = require("sequelize");
 
 const addArticle = async (req, res) => {
     const { body } = req;
@@ -57,7 +58,9 @@ const getArticles = async (req, res) => {
 const getArticlesByTittle = async (req, res) => {
     try {
         const searchTerm = req.query.q; // Mendapatkan query pencarian dari request
-        const articles = await Article.findAll({
+        console.log(searchTerm)
+        console.log(req.query)
+        const article = await articles.findAll({
             where: {
                 // Menentukan kondisi pencarian, misalnya judul mengandung searchTerm
                 title: {
@@ -68,7 +71,7 @@ const getArticlesByTittle = async (req, res) => {
 
         res.json({
             message: 'Search Success',
-            data: articles
+            data: article
         });
 
     } catch (error) {
