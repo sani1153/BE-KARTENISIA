@@ -98,9 +98,28 @@ const loginController = async (req, res) => {
     }
 }
 
+const getUsers = async (req, res) => {
+  console.log(req)
+  try {
+      const Users = await User.findAll()
+
+      res.json({
+          message: 'Get Messages Success',
+          data: Users // Mengirim data artikel sebagai respons
+      });
+
+  } catch (error) {
+      res.status(500).json({
+          message: "Server Error",
+          serverMessage : error
+      })
+  }
+}
+
 module.exports = {
     createNewUser,
-    loginController
+    loginController,
+    getUsers
 }
 
 
