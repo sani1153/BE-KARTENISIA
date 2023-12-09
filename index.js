@@ -12,7 +12,7 @@ const app = express();
 // MIDDLEWARE
 app.use(cors())
 app.use(express.json())
-app.use('/assets', express.static('public/images'))
+// app.use('/assets', express.static('public/images'))
 
 // ROUTES
 app.use(UserRoute);

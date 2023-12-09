@@ -116,10 +116,17 @@ const getUsers = async (req, res) => {
   }
 }
 
+const logoutController = async (req, res) => {
+  // Hapus token dari sisi klien (contoh menggunakan localStorage)
+  localStorage.removeItem('token');
+  res.status(200).json({ message: 'Logout berhasil' });
+}
+
 module.exports = {
     createNewUser,
     loginController,
-    getUsers
+    getUsers,
+    logoutController
 }
 
 
