@@ -125,6 +125,28 @@ const getArticlesById2 = async (req, res) => {
       res.status(500).json({ message: 'Terjadi kesalahan dalam mengambil Artikel' });
     }
   }
+
+  const getArticlesByDate = async (req, res) => {
+    try {
+      const { order } = req.query; // 'asc' or 'desc'
+      
+      let article;
+      if (order === 'asc') {
+        article = await articles.findAll({
+          order: [['createdAt', 'ASC']]
+        });
+      } else {
+        article = await articles.findAll({
+          order: [['createdAt', 'DESC']]
+        });
+      }
+  
+      res.json(article);
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ message: 'Terjadi kesalahan dalam mengambil Artikel berdasarkan tanggal' });
+    }
+  };
   
 // function backfillArticle(req, res, next){
 //     articles.bulkCreate([{
@@ -157,5 +179,6 @@ module.exports = {
     getArticles,
     getArticlesByTittle,
     getArticlesById,
-    getArticlesById2
+    getArticlesById2,
+    getArticlesByDate
 }

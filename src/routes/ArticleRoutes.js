@@ -8,5 +8,6 @@ router.post('/post-article', ArticleRoute.addArticle);
 router.get('/articles/search', ArticleRoute.getArticlesByTittle)
 router.get('/article', ArticleRoute.getArticlesById)
 router.get('/news/:id', ArticleRoute.getArticlesById2)
+router.get('/new', ArticleRoute.getArticlesByDate)
 
 module.exports = router;
