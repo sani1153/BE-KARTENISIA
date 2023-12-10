@@ -148,6 +148,37 @@ const getArticlesById2 = async (req, res) => {
     }
   };
   
+  const getArticlesByDateAndCategory = async (req, res) => {
+    try {
+      const { order, category } = req.query; // 'asc' or 'desc', 'health' or 'fashion'
+      
+      let article;
+      if (order === 'asc') {
+        article = await articles.findAll({
+          where: {
+            category: {
+              [Op.or]: [category === 'kesehatan' ? 'kesehatan' : null, category === 'fesyen' ? 'fesyen' : null]
+            }
+          },
+          order: [['createdAt', 'ASC']]
+        });
+      } else {
+        article = await articles.findAll({
+          where: {
+            category: {
+              [Op.or]: [category === 'kesehatan' ? 'kesehatan' : null, category === 'fesyen' ? 'fesyen' : null]
+            }
+          },
+          order: [['createdAt', 'DESC']]
+        });
+      }
+  
+      res.json(article);
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ message: 'Terjadi kesalahan dalam mengambil Artikel berdasarkan tanggal dan kategori' });
+    }
+  };
 // function backfillArticle(req, res, next){
 //     articles.bulkCreate([{
 //         title: "Article 1",
@@ -180,5 +211,6 @@ module.exports = {
     getArticlesByTittle,
     getArticlesById,
     getArticlesById2,
-    getArticlesByDate
+    getArticlesByDate,
+    getArticlesByDateAndCategory
 }

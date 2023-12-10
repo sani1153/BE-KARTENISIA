@@ -9,5 +9,6 @@ router.get('/articles/search', ArticleRoute.getArticlesByTittle)
 router.get('/article', ArticleRoute.getArticlesById)
 router.get('/news/:id', ArticleRoute.getArticlesById2)
 router.get('/new', ArticleRoute.getArticlesByDate)
+router.get('/berita', ArticleRoute.getArticlesByDateAndCategory)
 
 module.exports = router;
