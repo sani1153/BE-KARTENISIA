@@ -82,6 +82,34 @@ const getArticlesByTittle = async (req, res) => {
     }
 };
 
+const getArticlesById  = async (req, res) => {
+    console.log(req)
+    try {
+        let articlesData;
+        // Mengambil data artikel
+        if(req.query.article_id){
+            articlesData = await articles.findAll({
+                where: {
+                    article_id: req.query.article_id
+                }
+        
+            });
+        }else{
+            articlesData = await articles.findAll()
+        }
+
+        res.json({
+            message: 'Get Article Success',
+            data: articlesData // Mengirim data artikel sebagai respons
+        });
+
+    } catch (error) {
+        res.status(500).json({
+            message: "Server Error",
+            serverMessage : error
+        })
+    }
+}
 
 // function backfillArticle(req, res, next){
 //     articles.bulkCreate([{
@@ -112,5 +140,6 @@ const getArticlesByTittle = async (req, res) => {
 module.exports = {
     addArticle, 
     getArticles,
-    getArticlesByTittle
+    getArticlesByTittle,
+    getArticlesById
 }
