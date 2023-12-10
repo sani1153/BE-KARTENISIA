@@ -111,6 +111,21 @@ const getArticlesById  = async (req, res) => {
     }
 }
 
+const getArticlesById2 = async (req, res) => {
+    try {
+      const { id } = req.params;
+      const article = await articles.findByPk(id);
+      if (!article) {
+        res.status(404).json({ message: 'Artikel tidak ditemukan' });
+        return;
+      }
+      res.json(article);
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ message: 'Terjadi kesalahan dalam mengambil Artikel' });
+    }
+  }
+  
 // function backfillArticle(req, res, next){
 //     articles.bulkCreate([{
 //         title: "Article 1",
@@ -141,5 +156,6 @@ module.exports = {
     addArticle, 
     getArticles,
     getArticlesByTittle,
-    getArticlesById
+    getArticlesById,
+    getArticlesById2
 }
