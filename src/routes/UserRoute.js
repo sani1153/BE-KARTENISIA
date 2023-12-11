@@ -1,12 +1,16 @@
 const express = require('express');
 const createNewUser = require('../controller/UserController.js')
 const verify = require('../middleware/LogoutVerify.js');
-const verify2 = require('../middleware/LoginVerify.js');
+const verifyToken = require('../middleware/LoginVerify.js');
 
 const router = express.Router();
 
 router.post("/signup", createNewUser.createNewUser)
-router.post("/login", createNewUser.loginController)
+router.post("/login", createNewUser.createNewUser)
+router.post("api/user'", verifyToken, createNewUser.loginController, (req, res) => {
+    res.json({ userData: req.userData });
+})
+
 router.get("/users", createNewUser.getUsers)
 router.post("/logout", verify, createNewUser.logoutController)
 router.get('/user/:id', createNewUser.getUserById)
