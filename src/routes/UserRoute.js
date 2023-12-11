@@ -6,7 +6,7 @@ const verify2 = require('../middleware/LoginVerify.js');
 const router = express.Router();
 
 router.post("/signup", createNewUser.createNewUser)
-router.post("/login", verify2, createNewUser.loginController)
+router.post("/login", createNewUser.loginController)
 router.get("/users", createNewUser.getUsers)
 router.post("/logout", verify, createNewUser.logoutController)
 router.get('/user/:id', createNewUser.getUserById)
