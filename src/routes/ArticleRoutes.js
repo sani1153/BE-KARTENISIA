@@ -3,12 +3,19 @@ const ArticleRoute = require('../controller/ArticleController')
 
 const router = express.Router()
 
-router.get('/articles', ArticleRoute.getArticles);
+// POST ARTICLE
 router.post('/post-article', ArticleRoute.addArticle);
-router.get('/articles/search', ArticleRoute.getArticlesByTittle)
-router.get('/news/:id', ArticleRoute.getArticlesById)
-router.get('/new', ArticleRoute.getArticlesByDate)
-router.get('/berita', ArticleRoute.getArticlesByDateAndCategory)
-router.get('/random', ArticleRoute.getRandomArticle)
+// GET ALL ARTICLE/GET ARTICLE BY CATEGORY
+router.get('/articles', ArticleRoute.getArticles);
+// GET ARTICLE BY TITLE
+router.get('/articles/search', ArticleRoute.getArticlesByTitle)
+// GET ARTICLE BY ID
+router.get('/article/:id', ArticleRoute.getArticlesById)
+// GET ARTICLE BY DATE
+router.get('/articles/date', ArticleRoute.getArticlesByDate)
+// GET ARTICLE BY DATE AND CATEGORY
+router.get('/articles/date&category', ArticleRoute.getArticlesByDateAndCategory)
+// GET ALL ARTICLE BY RANDOM ID
+router.get('/articles/random', ArticleRoute.getAllRandomArticles)
 
 module.exports = router;

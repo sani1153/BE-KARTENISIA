@@ -2,26 +2,26 @@ const { DataTypes } = require('sequelize')
 const db = require('../config/db.js');
 
 const Articles = db.define("articles", {
-    article_id: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      autoIncrement: true,
-    },
-    title: {
-      type: DataTypes.STRING
-    },
-    url_image: {
-        type: DataTypes.STRING
-    },
-    description: {
-        type: DataTypes.TEXT
-    },
-    category: {
-      type: DataTypes.STRING
-    }
-    }, {
-        freezeTableName: true,
-    });
+  article_id: {
+    type: DataTypes.INTEGER,
+    primaryKey: true,
+    autoIncrement: true,
+  },
+  title: {
+    type: DataTypes.STRING
+  },
+  url_image: {
+    type: DataTypes.STRING
+  },
+  description: {
+    type: DataTypes.TEXT
+  },
+  category: {
+    type: DataTypes.STRING
+  }
+  }, {
+    freezeTableName: true,
+  });
 
 
 // WARNING! KODE DI BAWAH BERFUNGSI UNTUK MEMBUAT TABLE BARU ATAU UPDATE TABLE TAPI DENGAN MENGHAPUS SEMUA VALUE YG ADA 

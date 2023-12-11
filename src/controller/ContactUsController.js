@@ -1,5 +1,6 @@
 const ContactUs = require('../models/ContactUsModel');
 
+// POST MESSAGE
 const SendMessage = async (req, res) => {
     const {body} = req;
 
@@ -32,8 +33,8 @@ const SendMessage = async (req, res) => {
       }
 }
 
+// GET ALL MESSAGE
 const getMessage = async (req, res) => {
-    console.log(req)
     try {
         const Message = await ContactUs.findAll()
 

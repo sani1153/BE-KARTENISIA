@@ -1,10 +1,10 @@
 const express = require("express");
-const PORT = 3600;
-require('dotenv').config()
 const cors = require('cors')
+require('dotenv').config()
+const PORT = 3600;
+
 const UserRoute =  require('./src/routes/UserRoute.js');
 const ContactUsRoute =  require('./src/routes/ContactUsRoute.js');
-const CommentRoute = require('./src/routes/CommentRoute.js')
 const ArticleRoute = require('./src/routes/ArticleRoutes.js')
 
 const app = express();
@@ -12,12 +12,10 @@ const app = express();
 // MIDDLEWARE
 app.use(cors())
 app.use(express.json())
-// app.use('/assets', express.static('public/images'))
 
 // ROUTES
 app.use(UserRoute);
 app.use(ContactUsRoute);
-app.use(CommentRoute);
 app.use(ArticleRoute);
 
 app.listen(PORT, () => {
