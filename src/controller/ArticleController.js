@@ -180,7 +180,7 @@ const getArticlesByDate = async (req, res) => {
     }
   };
 
-  const getRandomArticle = async () => {
+  const getRandomArticle = async (req, res) => {
     try {
       // Mendapatkan jumlah total artikel dalam basis data Anda
       const totalArticles = await articles.count(); // Ganti Article dengan model Anda
@@ -194,7 +194,8 @@ const getArticlesByDate = async (req, res) => {
       if (!article) {
         return { error: 'Artikel tidak ditemukan' };
       }
-      return article;
+      res.json(article);
+
 
     } catch (error) {
       console.error('Terjadi kesalahan:', error);
@@ -203,10 +204,10 @@ const getArticlesByDate = async (req, res) => {
   };
   
   // Penggunaan fungsi getRandomArticle
-  getRandomArticle().then(article => {
-    console.log(article);
-    // Lakukan sesuatu dengan artikel yang didapatkan
-  });
+  // getRandomArticle().then(article => {
+  //   console.log(article);
+  //   // Lakukan sesuatu dengan artikel yang didapatkan
+  // });
   
 // function backfillArticle(req, res, next){
 //     articles.bulkCreate([{

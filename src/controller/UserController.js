@@ -116,6 +116,21 @@ const getUsers = async (req, res) => {
   }
 }
 
+const getUserById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const getUser = await User.findByPk(id);
+    if (!getUser) {
+      res.status(404).json({ message: 'User tidak ditemukan' });
+      return;
+    }
+    res.json(getUser);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Terjadi kesalahan dalam mengambil User' });
+  }
+}
+
 const logoutController = async (req, res) => {
   // Hapus token dari sisi klien (contoh menggunakan localStorage)
   localStorage.removeItem('token');
@@ -126,7 +141,8 @@ module.exports = {
     createNewUser,
     loginController,
     getUsers,
-    logoutController
+    logoutController,
+    getUserById
 }
 
 
