@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.post("/signup", createNewUser.createNewUser)
 router.post("/login", createNewUser.createNewUser)
-router.post("api/user", verifyToken, createNewUser.loginController, (req, res) => {
+router.post("api/user", verifyToken, (req, res) => {
     res.json({ userData: req.userData });
 })
 
