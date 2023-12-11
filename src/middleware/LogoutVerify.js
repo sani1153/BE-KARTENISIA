@@ -12,7 +12,7 @@ function verifyTokenLogout(req, res, next) {
         return res.status(401).json({ message: 'Failed to authenticate token' });
       }
   
-      req.userId = decoded.id; // Menyimpan ID pengguna ke dalam objek request
+      req.user_id = decoded.id; // Menyimpan ID pengguna ke dalam objek request
       next();
     });
   }
