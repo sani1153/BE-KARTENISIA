@@ -62,6 +62,45 @@ const createNewUser = async (req, res) => {
 }
 
 // LOGIN USER
+// const loginController = async (req, res) => {
+//   const { email, password } = req.body;
+  
+//   try {
+//     // Cari pengguna berdasarkan email
+//     const user = await User.findOne({ where: { email } });
+  
+//     // Jika pengguna tidak ditemukan
+//     if (!user) {
+//       return res.status(404).json({ message: 'Pengguna tidak ditemukan' });
+//     }
+  
+//     // Bandingkan password yang dimasukkan dengan password di database
+//     const passwordMatch = await bcrypt.compare(password, user.password);
+      
+  
+//     // Jika password tidak cocok
+//     if (!passwordMatch) {
+//       return res.status(401).json({ 
+//           message: 'Password salah',
+//           data : user.password 
+//       });
+//     }
+
+//     if(passwordMatch){
+//       const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
+//         expiresIn: 86400 // expires in 24 hours
+//       });
+//       // Jika email dan password cocok, user berhasil login
+//       res.status(200).json({ message: 'Login berhasil', user, token });
+//     }
+  
+  
+//   } catch (error) {
+//     console.error('Error:', error);
+//     res.status(500).json({ message: 'Terjadi kesalahan saat login' });
+//   }
+// }
+
 const loginController = async (req, res) => {
   const { email, password } = req.body;
   
@@ -90,8 +129,9 @@ const loginController = async (req, res) => {
       const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
         expiresIn: 86400 // expires in 24 hours
       });
-      // Jika email dan password cocok, user berhasil login
-      res.status(200).json({ message: 'Login berhasil', user, token });
+
+      // Include username in the response
+      res.status(200).json({ message: 'Login berhasil', user: { email: user.email, username: user.username }, token });
     }
   
   
@@ -100,6 +140,7 @@ const loginController = async (req, res) => {
     res.status(500).json({ message: 'Terjadi kesalahan saat login' });
   }
 }
+
 
 // GET ALL USERS
 const getUsers = async (req, res) => {
