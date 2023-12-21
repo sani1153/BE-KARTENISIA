@@ -202,6 +202,127 @@ const getAllRandomArticles = async (req, res) => {
   }
 };
 
+// const getAllRandomArticles = async (req, res) => {
+//   try {
+//     // Mendapatkan jumlah total artikel dalam basis data Anda
+//     const totalArticles = await articles.count(); // Ganti Article dengan model Anda
+  
+//     // Array untuk menyimpan artikel yang akan dikembalikan
+//     const randomArticles = [];
+  
+//     // Set untuk melacak ID yang sudah diambil
+//     const takenIds = new Set();
+  
+//     // Menghasilkan ID acak untuk setiap artikel yang akan diambil
+//     while (randomArticles.length < totalArticles) {
+//       const randomId = Math.floor(Math.random() * totalArticles) + 1;
+  
+//       // Memastikan ID belum diambil sebelumnya
+//       if (!takenIds.has(randomId)) {
+//         takenIds.add(randomId);
+  
+//         // Mengambil artikel dengan ID acak yang dihasilkan
+//         const article = await articles.findByPk(randomId); // Ganti Article dengan model Anda
+  
+//         if (article) {
+//           randomArticles.push(article);
+//         }
+//       }
+//     }
+  
+//     res.json({
+//       message: 'Get Article Success',
+//       data: randomArticles
+//     });
+  
+//   } catch (error) {
+//     console.error('Terjadi kesalahan:', error);
+//     return { error: 'Terjadi kesalahan dalam mengambil artikel' };
+//   }
+// };
+
+
+// GET ALL ARTICLE BY RANDOM ID WITH LIMIT
+const getAllRandomArticlesLimit3 = async (req, res) => {
+  try {
+    // Mendapatkan jumlah total artikel dalam basis data Anda
+    const totalArticles = await articles.count(); // Ganti Article dengan model Anda
+  
+    // Batasan jumlah artikel yang ingin diambil
+    const numberOfArticlesToGet = 3; // Ganti dengan jumlah yang diinginkan
+  
+    // Array untuk menyimpan artikel yang akan dikembalikan
+    const randomArticles = [];
+  
+    // Menghasilkan ID acak untuk setiap artikel yang akan diambil
+    const selectedIds = new Set();
+    while (randomArticles.length < numberOfArticlesToGet) {
+      const randomId = Math.floor(Math.random() * totalArticles) + 1;
+  
+      // Memastikan ID tidak duplikat
+      if (!selectedIds.has(randomId)) {
+        selectedIds.add(randomId);
+  
+        // Mengambil artikel dengan ID acak yang dihasilkan
+        const article = await articles.findByPk(randomId); // Ganti Article dengan model Anda
+  
+        if (article) {
+          randomArticles.push(article);
+        }
+      }
+    }
+  
+    res.json({
+      message: 'Get Article Success',
+      data: randomArticles
+    });
+  
+  } catch (error) {
+    console.error('Terjadi kesalahan:', error);
+    return { error: 'Terjadi kesalahan dalam mengambil artikel' };
+  }
+};
+
+const getAllRandomArticlesLimit9 = async (req, res) => {
+  try {
+    // Mendapatkan jumlah total artikel dalam basis data Anda
+    const totalArticles = await articles.count(); // Ganti Article dengan model Anda
+  
+    // Batasan jumlah artikel yang ingin diambil
+    const numberOfArticlesToGet = 9; // Ganti dengan jumlah yang diinginkan
+  
+    // Array untuk menyimpan artikel yang akan dikembalikan
+    const randomArticles = [];
+  
+    // Menghasilkan ID acak untuk setiap artikel yang akan diambil
+    const selectedIds = new Set();
+    while (randomArticles.length < numberOfArticlesToGet) {
+      const randomId = Math.floor(Math.random() * totalArticles) + 1;
+  
+      // Memastikan ID tidak duplikat
+      if (!selectedIds.has(randomId)) {
+        selectedIds.add(randomId);
+  
+        // Mengambil artikel dengan ID acak yang dihasilkan
+        const article = await articles.findByPk(randomId); // Ganti Article dengan model Anda
+  
+        if (article) {
+          randomArticles.push(article);
+        }
+      }
+    }
+  
+    res.json({
+      message: 'Get Article Success',
+      data: randomArticles
+    });
+  
+  } catch (error) {
+    console.error('Terjadi kesalahan:', error);
+    return { error: 'Terjadi kesalahan dalam mengambil artikel' };
+  }
+};
+
 module.exports = {
     addArticle, 
     getArticles,
@@ -209,5 +330,7 @@ module.exports = {
     getArticlesById,
     getArticlesByDate,
     getArticlesByDateAndCategory,
-    getAllRandomArticles
+    getAllRandomArticles,
+    getAllRandomArticlesLimit3,
+    getAllRandomArticlesLimit9
 }
